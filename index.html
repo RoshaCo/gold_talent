@@ -1,0 +1,1234 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"
+    >
+
+    <meta name="theme-color" content="#050505">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <title>ورود به سایت | قرعه‌کشی</title>
+
+    <style>
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            min-height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background: #050505;
+        }
+
+        body {
+            position: fixed;
+            inset: 0;
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            color: #ffffff;
+            background:
+                radial-gradient(
+                    circle at 50% 8%,
+                    rgba(255,255,255,0.055) 0%,
+                    rgba(255,255,255,0.018) 22%,
+                    transparent 48%
+                ),
+                radial-gradient(
+                    circle at 85% 70%,
+                    rgba(67,108,255,0.075) 0%,
+                    transparent 35%
+                ),
+                #050505;
+
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+
+        /* =========================================================
+           MAIN VIEWPORT
+        ========================================================= */
+
+        .viewport {
+            position: relative;
+
+            width: 100%;
+            height: 100vh;
+            height: 100svh;
+            height: 100dvh;
+
+            min-height: 100svh;
+            min-height: 100dvh;
+
+            overflow: hidden;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding:
+                max(18px, env(safe-area-inset-top))
+                max(18px, env(safe-area-inset-right))
+                max(18px, env(safe-area-inset-bottom))
+                max(18px, env(safe-area-inset-left));
+        }
+
+
+        /* =========================================================
+           AMBIENT LIGHT
+        ========================================================= */
+
+        .ambient {
+            position: absolute;
+
+            width: 48vw;
+            height: 48vw;
+
+            max-width: 520px;
+            max-height: 520px;
+
+            min-width: 260px;
+            min-height: 260px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(72,104,255,0.105) 0%,
+                    rgba(72,104,255,0.035) 34%,
+                    transparent 70%
+                );
+
+            filter: blur(20px);
+
+            pointer-events: none;
+
+            top: -18%;
+            left: 50%;
+
+            transform: translateX(-50%);
+        }
+
+        .ambient::after {
+            content: "";
+
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(255,255,255,0.025),
+                    transparent 65%
+                );
+        }
+
+
+        /* =========================================================
+           CONTENT
+        ========================================================= */
+
+        .content {
+            position: relative;
+            z-index: 2;
+
+            width: min(100%, 470px);
+
+            max-height: 100%;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: center;
+            align-items: stretch;
+
+            text-align: center;
+
+            padding:
+                clamp(8px, 2vh, 20px)
+                0;
+        }
+
+
+        /* =========================================================
+           TOP LABEL
+        ========================================================= */
+
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            align-self: center;
+
+            min-height: 30px;
+
+            padding: 0 14px;
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            border-radius: 999px;
+
+            background: rgba(255,255,255,0.035);
+
+            color: rgba(255,255,255,0.64);
+
+            font-size: clamp(11px, 2.8vw, 13px);
+            font-weight: 500;
+
+            letter-spacing: 0.2px;
+
+            margin-bottom: clamp(14px, 3vh, 25px);
+
+            white-space: nowrap;
+        }
+
+        .eyebrow::before {
+            content: "";
+
+            width: 6px;
+            height: 6px;
+
+            margin-left: 8px;
+
+            border-radius: 50%;
+
+            background: #6d8cff;
+
+            box-shadow:
+                0 0 0 4px rgba(109,140,255,0.08),
+                0 0 14px rgba(109,140,255,0.45);
+        }
+
+
+        /* =========================================================
+           HEADLINE
+        ========================================================= */
+
+        .headline {
+            margin: 0;
+
+            color: #ffffff;
+
+            font-size: clamp(25px, 7.3vw, 40px);
+
+            line-height: 1.55;
+
+            font-weight: 800;
+
+            letter-spacing: -0.6px;
+
+            text-wrap: balance;
+        }
+
+        .headline .accent {
+            color: #8ca5ff;
+        }
+
+
+        /* =========================================================
+           DESCRIPTION
+        ========================================================= */
+
+        .description {
+            margin:
+                clamp(12px, 2.4vh, 20px)
+                auto
+                0;
+
+            max-width: 420px;
+
+            color: rgba(255,255,255,0.64);
+
+            font-size: clamp(15px, 4.1vw, 18px);
+
+            line-height: 2;
+
+            font-weight: 400;
+        }
+
+
+        /* =========================================================
+           GUIDE
+        ========================================================= */
+
+        .guide {
+            display: flex;
+
+            align-items: stretch;
+
+            gap: 8px;
+
+            margin-top: clamp(16px, 3vh, 25px);
+
+            width: 100%;
+        }
+
+        .guide-item {
+            flex: 1;
+
+            min-width: 0;
+
+            min-height: 57px;
+
+            display: flex;
+            align-items: center;
+
+            padding: 10px 12px;
+
+            border: 1px solid rgba(255,255,255,0.075);
+
+            border-radius: 16px;
+
+            background: rgba(255,255,255,0.025);
+
+            text-align: right;
+        }
+
+        .guide-number {
+            flex: 0 0 27px;
+
+            width: 27px;
+            height: 27px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-left: 9px;
+
+            border-radius: 50%;
+
+            background: rgba(255,255,255,0.08);
+
+            color: rgba(255,255,255,0.8);
+
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .guide-text {
+            min-width: 0;
+
+            color: rgba(255,255,255,0.72);
+
+            font-size: clamp(11px, 3vw, 13px);
+
+            line-height: 1.7;
+
+            font-weight: 500;
+        }
+
+
+        /* =========================================================
+           PRIMARY CTA
+        ========================================================= */
+
+        .enter-btn {
+            position: relative;
+
+            width: 100%;
+
+            min-height: 62px;
+
+            margin-top: clamp(17px, 3.2vh, 27px);
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border: 0;
+            border-radius: 18px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #ffffff 0%,
+                    #eeeeee 100%
+                );
+
+            color: #080808;
+
+            text-decoration: none;
+
+            font-size: clamp(17px, 4.7vw, 20px);
+
+            font-weight: 800;
+
+            letter-spacing: -0.2px;
+
+            box-shadow:
+                0 12px 38px rgba(0,0,0,0.38),
+                0 0 0 1px rgba(255,255,255,0.10);
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.18s ease,
+                box-shadow 0.18s ease,
+                opacity 0.18s ease;
+        }
+
+        .enter-btn::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: -80%;
+
+            width: 55%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.65),
+                    transparent
+                );
+
+            transform: skewX(-18deg);
+
+            animation: shine 4.8s ease-in-out infinite;
+        }
+
+        .enter-btn span {
+            position: relative;
+            z-index: 2;
+        }
+
+        .enter-btn:active {
+            transform: scale(0.985);
+
+            box-shadow:
+                0 7px 22px rgba(0,0,0,0.35);
+        }
+
+        @keyframes shine {
+            0% {
+                left: -80%;
+            }
+
+            22%,
+            100% {
+                left: 140%;
+            }
+        }
+
+
+        /* =========================================================
+           URL SECTION
+        ========================================================= */
+
+        .url-title {
+            margin-top: clamp(14px, 2.5vh, 21px);
+            margin-bottom: 8px;
+
+            color: rgba(255,255,255,0.38);
+
+            font-size: 11px;
+
+            font-weight: 500;
+        }
+
+        .url-row {
+            width: 100%;
+
+            display: flex;
+            align-items: stretch;
+
+            gap: 8px;
+
+            direction: ltr;
+        }
+
+        .url-box {
+            flex: 1;
+            min-width: 0;
+
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            padding: 0 11px;
+
+            border: 1px solid rgba(255,255,255,0.10);
+
+            border-radius: 15px;
+
+            background: rgba(255,255,255,0.045);
+
+            color: rgba(255,255,255,0.76);
+
+            font-family:
+                Arial,
+                Tahoma,
+                sans-serif;
+
+            font-size: clamp(11px, 3.3vw, 14px);
+
+            direction: ltr;
+
+            white-space: nowrap;
+
+            overflow: hidden;
+
+            user-select: all;
+        }
+
+        .copy-btn {
+            flex: 0 0 auto;
+
+            height: 52px;
+
+            min-width: 112px;
+
+            padding: 0 17px;
+
+            border: 1px solid rgba(255,255,255,0.13);
+
+            border-radius: 15px;
+
+            background: #161616;
+
+            color: #ffffff;
+
+            font-family:
+                Tahoma,
+                Arial,
+                sans-serif;
+
+            font-size: clamp(13px, 3.5vw, 15px);
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            transition:
+                background 0.18s ease,
+                transform 0.18s ease,
+                border-color 0.18s ease;
+        }
+
+        .copy-btn:active {
+            transform: scale(0.97);
+        }
+
+        .copy-btn.success {
+            background: #ffffff;
+            color: #080808;
+            border-color: #ffffff;
+        }
+
+
+        /* =========================================================
+           BOTTOM NOTE
+        ========================================================= */
+
+        .bottom-note {
+            margin:
+                clamp(11px, 2.2vh, 17px)
+                auto
+                0;
+
+            max-width: 430px;
+
+            color: rgba(255,255,255,0.34);
+
+            font-size: clamp(10px, 2.8vw, 12px);
+
+            line-height: 1.8;
+        }
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        .toast {
+            position: fixed;
+
+            z-index: 20;
+
+            left: 50%;
+
+            bottom:
+                calc(
+                    max(16px, env(safe-area-inset-bottom))
+                    + 18px
+                );
+
+            transform:
+                translate(-50%, 15px);
+
+            width: max-content;
+
+            max-width: calc(100vw - 32px);
+
+            padding: 11px 17px;
+
+            border:
+                1px solid rgba(255,255,255,0.12);
+
+            border-radius: 12px;
+
+            background: rgba(20,20,20,0.94);
+
+            color: #ffffff;
+
+            font-size: 12px;
+
+            opacity: 0;
+            pointer-events: none;
+
+            transition:
+                opacity 0.22s ease,
+                transform 0.22s ease;
+        }
+
+        .toast.show {
+            opacity: 1;
+
+            transform:
+                translate(-50%, 0);
+        }
+
+
+        /* =========================================================
+           SHORT SCREENS
+        ========================================================= */
+
+        @media (max-height: 680px) {
+
+            .content {
+                padding-top: 3px;
+                padding-bottom: 3px;
+            }
+
+            .eyebrow {
+                margin-bottom: 10px;
+                min-height: 27px;
+            }
+
+            .headline {
+                font-size: clamp(23px, 6.8vw, 34px);
+                line-height: 1.45;
+            }
+
+            .description {
+                margin-top: 9px;
+                font-size: 14px;
+                line-height: 1.8;
+            }
+
+            .guide {
+                margin-top: 12px;
+            }
+
+            .guide-item {
+                min-height: 49px;
+                padding: 7px 9px;
+            }
+
+            .guide-number {
+                width: 23px;
+                height: 23px;
+                flex-basis: 23px;
+                margin-left: 7px;
+            }
+
+            .guide-text {
+                font-size: 10px;
+            }
+
+            .enter-btn {
+                min-height: 56px;
+                margin-top: 13px;
+                border-radius: 16px;
+                font-size: 16px;
+            }
+
+            .url-title {
+                margin-top: 10px;
+                margin-bottom: 5px;
+            }
+
+            .url-box,
+            .copy-btn {
+                height: 47px;
+            }
+
+            .copy-btn {
+                min-width: 100px;
+            }
+
+            .bottom-note {
+                margin-top: 8px;
+                font-size: 10px;
+            }
+        }
+
+
+        /* =========================================================
+           VERY SHORT DEVICES
+        ========================================================= */
+
+        @media (max-height: 560px) {
+
+            .eyebrow {
+                display: none;
+            }
+
+            .description {
+                margin-top: 6px;
+                line-height: 1.65;
+            }
+
+            .guide {
+                margin-top: 9px;
+            }
+
+            .guide-item:nth-child(2) {
+                display: none;
+            }
+
+            .enter-btn {
+                margin-top: 10px;
+                min-height: 52px;
+            }
+
+            .url-title {
+                margin-top: 8px;
+            }
+
+            .bottom-note {
+                display: none;
+            }
+        }
+
+
+        /* =========================================================
+           VERY NARROW DEVICES
+        ========================================================= */
+
+        @media (max-width: 350px) {
+
+            .viewport {
+                padding-left: 14px;
+                padding-right: 14px;
+            }
+
+            .headline {
+                font-size: 22px;
+            }
+
+            .description {
+                font-size: 13px;
+            }
+
+            .guide-item {
+                min-height: 46px;
+            }
+
+            .guide-text {
+                font-size: 9px;
+            }
+
+            .copy-btn {
+                min-width: 91px;
+                padding-left: 10px;
+                padding-right: 10px;
+                font-size: 12px;
+            }
+
+            .url-box {
+                font-size: 10px;
+            }
+        }
+
+
+        /* =========================================================
+           EXTRA NARROW
+        ========================================================= */
+
+        @media (max-width: 315px) {
+
+            .viewport {
+                padding-left: 11px;
+                padding-right: 11px;
+            }
+
+            .guide {
+                gap: 5px;
+            }
+
+            .guide-item {
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+
+            .guide-number {
+                margin-left: 5px;
+            }
+
+            .copy-btn {
+                min-width: 86px;
+            }
+        }
+
+
+        /* =========================================================
+           REDUCED MOTION
+        ========================================================= */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="viewport">
+
+        <div class="ambient"></div>
+
+        <section class="content">
+
+            <div class="eyebrow">
+                راهنمای ورود به قرعه‌کشی
+            </div>
+
+            <h1 class="headline">
+                برای شرکت در <span class="accent">قرعه‌کشی</span>،
+                ابتدا فیلترشکن خود را خاموش کنید.
+            </h1>
+
+            <p class="description">
+                سپس مستقیماً وارد سایت شوید؛
+                یا در صورت نیاز، آدرس سایت را کپی کرده
+                و در مرورگر خود وارد نمایید.
+            </p>
+
+
+            <div class="guide">
+
+                <div class="guide-item">
+                    <div class="guide-number">۱</div>
+
+                    <div class="guide-text">
+                        فیلترشکن را خاموش کنید
+                    </div>
+                </div>
+
+                <div class="guide-item">
+                    <div class="guide-number">۲</div>
+
+                    <div class="guide-text">
+                        وارد سایت شوید
+                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- PRIMARY CTA -->
+
+            <a
+                id="enterButton"
+                class="enter-btn"
+                href="https://www.rosha-24.ir/x7q"
+                rel="noopener"
+            >
+                <span>ورود به سایت</span>
+            </a>
+
+
+            <!-- URL -->
+
+            <div class="url-title">
+                آدرس مستقیم سایت
+            </div>
+
+            <div class="url-row">
+
+                <div
+                    id="siteUrl"
+                    class="url-box"
+                    role="textbox"
+                    aria-label="آدرس سایت"
+                >
+                    www.rosha-24.ir/x7q
+                </div>
+
+                <button
+                    id="copyButton"
+                    class="copy-btn"
+                    type="button"
+                >
+                    کپی آدرس
+                </button>
+
+            </div>
+
+
+            <div class="bottom-note">
+                برای بهترین تجربه، سایت را در مرورگر اصلی گوشی باز کنید.
+            </div>
+
+        </section>
+
+
+        <div
+            id="toast"
+            class="toast"
+            role="status"
+            aria-live="polite"
+        >
+            آدرس سایت کپی شد
+        </div>
+
+    </main>
+
+
+    <script>
+        /* =========================================================
+           CONFIG
+        ========================================================= */
+
+        const SITE_URL = "https://www.rosha-24.ir/x7q";
+        const DISPLAY_URL = "www.rosha-24.ir/x7q";
+
+
+        /* =========================================================
+           ELEMENTS
+        ========================================================= */
+
+        const enterButton = document.getElementById("enterButton");
+        const copyButton = document.getElementById("copyButton");
+        const toast = document.getElementById("toast");
+
+
+        /* =========================================================
+           DEVICE DETECTION
+        ========================================================= */
+
+        const isAndroid =
+            /Android/i.test(navigator.userAgent);
+
+        const isIOS =
+            /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+
+        /* =========================================================
+           OPEN SITE
+        ========================================================= */
+
+        function openSite(event) {
+
+            event.preventDefault();
+
+            /*
+             * Android:
+             * Try to hand the URL to the external browser.
+             */
+
+            if (isAndroid) {
+
+                const intentUrl =
+                    "intent://www.rosha-24.ir/x7q" +
+                    "#Intent;" +
+                    "scheme=https;" +
+                    "action=android.intent.action.VIEW;" +
+                    "category=android.intent.category.BROWSABLE;" +
+                    "end";
+
+                window.location.href = intentUrl;
+
+                /*
+                 * Fallback if Instagram/WebView blocks intent.
+                 */
+
+                setTimeout(function () {
+
+                    window.location.href = SITE_URL;
+
+                }, 900);
+
+                return;
+            }
+
+
+            /*
+             * iPhone / iPad:
+             * Normal HTTPS navigation.
+             */
+
+            window.location.href = SITE_URL;
+        }
+
+
+        enterButton.addEventListener(
+            "click",
+            openSite,
+            false
+        );
+
+
+        /* =========================================================
+           COPY ADDRESS
+        ========================================================= */
+
+        async function copyAddress() {
+
+            let success = false;
+
+
+            /*
+             * Modern Clipboard API
+             */
+
+            if (
+                navigator.clipboard &&
+                window.isSecureContext
+            ) {
+
+                try {
+
+                    await navigator.clipboard.writeText(
+                        DISPLAY_URL
+                    );
+
+                    success = true;
+
+                } catch (error) {
+
+                    success = false;
+                }
+            }
+
+
+            /*
+             * Fallback
+             */
+
+            if (!success) {
+
+                const temp =
+                    document.createElement("textarea");
+
+                temp.value = DISPLAY_URL;
+
+                temp.setAttribute(
+                    "readonly",
+                    ""
+                );
+
+                temp.style.position = "fixed";
+                temp.style.top = "-9999px";
+                temp.style.left = "-9999px";
+
+                document.body.appendChild(temp);
+
+                temp.focus();
+                temp.select();
+                temp.setSelectionRange(
+                    0,
+                    temp.value.length
+                );
+
+                try {
+
+                    success =
+                        document.execCommand("copy");
+
+                } catch (error) {
+
+                    success = false;
+                }
+
+                document.body.removeChild(temp);
+            }
+
+
+            /*
+             * UI feedback
+             */
+
+            if (success) {
+
+                copyButton.textContent =
+                    "کپی شد ✓";
+
+                copyButton.classList.add(
+                    "success"
+                );
+
+                showToast(
+                    "آدرس سایت کپی شد"
+                );
+
+                setTimeout(function () {
+
+                    copyButton.textContent =
+                        "کپی آدرس";
+
+                    copyButton.classList.remove(
+                        "success"
+                    );
+
+                }, 1800);
+
+            } else {
+
+                showToast(
+                    "آدرس را لمس کرده و کپی کنید"
+                );
+            }
+        }
+
+
+        copyButton.addEventListener(
+            "click",
+            copyAddress,
+            false
+        );
+
+
+        /* =========================================================
+           TOAST
+        ========================================================= */
+
+        let toastTimer = null;
+
+        function showToast(message) {
+
+            toast.textContent = message;
+
+            toast.classList.add("show");
+
+            clearTimeout(toastTimer);
+
+            toastTimer = setTimeout(
+                function () {
+
+                    toast.classList.remove(
+                        "show"
+                    );
+
+                },
+                1900
+            );
+        }
+
+
+        /* =========================================================
+           VIEWPORT HEIGHT SAFETY
+           Helps older Android WebViews / Instagram WebView.
+        ========================================================= */
+
+        function updateViewportHeight() {
+
+            if (!window.visualViewport) {
+                return;
+            }
+
+            const height =
+                window.visualViewport.height;
+
+            document.documentElement.style.setProperty(
+                "--visual-height",
+                height + "px"
+            );
+        }
+
+
+        if (window.visualViewport) {
+
+            window.visualViewport.addEventListener(
+                "resize",
+                updateViewportHeight,
+                { passive: true }
+            );
+
+            window.visualViewport.addEventListener(
+                "scroll",
+                updateViewportHeight,
+                { passive: true }
+            );
+        }
+
+        window.addEventListener(
+            "resize",
+            updateViewportHeight,
+            { passive: true }
+        );
+
+        updateViewportHeight();
+
+
+        /* =========================================================
+           PREVENT ACCIDENTAL DOUBLE TAP ZOOM
+        ========================================================= */
+
+        let lastTouchEnd = 0;
+
+        document.addEventListener(
+            "touchend",
+            function (event) {
+
+                const now =
+                    Date.now();
+
+                if (
+                    now - lastTouchEnd <= 280
+                ) {
+
+                    event.preventDefault();
+                }
+
+                lastTouchEnd = now;
+
+            },
+            { passive: false }
+        );
+
+    </script>
+
+</body>
+  </html>
